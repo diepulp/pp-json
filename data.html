@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Using jQuery Ajax with JSON</title>
+</head>
+<body>
+<label>Enter a name:<input type="text" id="search"></label>
+<button id="get">Get JSON Data</button>
+
+<div id="output"></div>
+
+<script src="//code.jquery.com/jquery.js"></script>
+
+<script>
+    $("#get").on("click", function () {
+        let search = $("#search").val().toLowerCase();
+        $.getJSON("classics.json", function (result) {
+            $.each(result, function (index, item) {
+                if (item.bibliography.author.name.toLowerCase().includes(search)) {
+                    $("#output").append(item.bibliography.author.name
+                        + " " + item.bibliography.title + ", " + item.bibliography.publication.full + "<br>");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
